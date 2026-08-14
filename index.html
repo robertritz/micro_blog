@@ -24,6 +24,136 @@
 	
 	  <div class="h-entry">
 		
+			<h1><a href="https://robertritz.com/2026/08/14/neural-network-experiments-are-easy.html">Neural network experiments are easy, I think</a></h1>
+		
+
+		<a href="https://robertritz.com/2026/08/14/neural-network-experiments-are-easy.html" class="u-url"><time class="dt-published" datetime="2026-08-14 16:26:32 &#43;0800">Aug 14, 2026</time></a>
+
+		<div class="e-content">
+			 <p>Heard recently on a podcast about how an ML model was created to predict how the neurons in a fruit fly were connected. The main finding was that the neurons connections could only be predicted reliably with a hyperbolic geometry. I thought it would be interesting to test, and I asked ChatGPT to research if this already existed. It turned up some similar things but not the exact idea.</p>
+<p>My core question was:</p>
+<blockquote>
+<p>Could hyperbolic proximity help a learning network choose which dormant connections to activate?</p>
+</blockquote>
+<p>I&rsquo;m not a deep learning research at all, but I do know how they work and have trained models from scratch and fine tuned them before. So I was familiar enough to know what to ask for.</p>
+<p>It seemed like an easy enough thing to test, especially with the help of AI. The end result wasn&rsquo;t promising (which is probably why it wasn&rsquo;t published anywhere). I still feel there is some merit in the concept of rewiring, and I know researchers are looking into it. In any event it was a fun side quest to think about.</p>
+<p>I&rsquo;ll let Codex/GPT5.6 Sol explain the experiment in its own words:</p>
+<blockquote>
+<h2 id="what-we-tested">What We Tested</h2>
+<p><em>This summary was written by OpenAI’s Codex. Robert proposed the idea; I built, ran, and audited the experiment.</em></p>
+<p>The idea was to let a sparse neural network change its wiring while it learned. Instead of keeping the same connections throughout training, the model periodically removed weak connections and replaced them with promising inactive ones.</p>
+<p>The question was how to choose those replacements. A standard method uses gradients, which estimate which connections would most reduce the model’s error. Robert wondered whether Hyperbolic geometry might do better. Hyperbolic space represents hierarchical structures efficiently, and language contains plenty of hierarchy. Perhaps learned Hyperbolic positions could reveal useful connections that gradients alone missed.</p>
+<h3 id="the-experiment">The experiment</h3>
+<p>I trained a 6.90-million-parameter language model on TinyStories. Only 25% of the connection blocks in its feed-forward layers were active at once. The main comparison included:</p>
+<ul>
+<li>Gradient-only rewiring</li>
+<li>Gradient plus Euclidean geometry</li>
+<li>Gradient plus Hyperbolic geometry</li>
+</ul>
+<p>Within each seed, the models shared identical starting weights, sparse masks, training data, and evaluation schedules. Each model trained for 100,663,296 tokens. The full confirmation included five treatments across three seeds, or 15 trained models.</p>
+<p>Lower validation loss means better prediction on text the model did not train on.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Method</th>
+          <th style="text-align: right">Mean validation loss</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Gradient rewiring</td>
+          <td style="text-align: right"><strong>2.293695</strong></td>
+      </tr>
+      <tr>
+          <td>Euclidean geometry</td>
+          <td style="text-align: right">2.293754</td>
+      </tr>
+      <tr>
+          <td>Hyperbolic geometry</td>
+          <td style="text-align: right">2.293781</td>
+      </tr>
+  </tbody>
+</table>
+<p>The three methods were effectively tied. Hyperbolic was 0.00114% worse than Euclidean on average and took 50.7% longer than gradient-only rewiring. Gradient rewiring did beat static sparsity in all three seeds, although only by about 0.082%.</p>
+<h3 id="one-larger-test">One larger test</h3>
+<p>To see whether scale changed the result, I increased the model to 24.54 million parameters and repeated the three main treatments with the same data, token budget, sparse density, and seed.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Method</th>
+          <th style="text-align: right">Validation loss</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Hyperbolic geometry</td>
+          <td style="text-align: right"><strong>2.046006</strong></td>
+      </tr>
+      <tr>
+          <td>Euclidean geometry</td>
+          <td style="text-align: right">2.046079</td>
+      </tr>
+      <tr>
+          <td>Gradient rewiring</td>
+          <td style="text-align: right">2.046139</td>
+      </tr>
+  </tbody>
+</table>
+<p>Hyperbolic technically finished first, but its improvement over Euclidean was only 0.0036%. Before training, we required at least 0.5% to count as a meaningful result. The observed advantage was about 140 times smaller. Hyperbolic was also worse on two of the final five evaluations, while Euclidean had the slightly better complete learning curve.</p>
+<p>Scale did improve efficiency. Hyperbolic’s runtime overhead fell from 50.7% to 15.9%. It became less expensive relative to the other methods, but it did not learn meaningfully better.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>This does not prove Hyperbolic rewiring can never work. It tested one architecture, dataset, sparse structure, and rewiring schedule. It does show that this particular method failed to produce a useful advantage at both 6.90 million and 24.54 million parameters.</p>
+<p>The entire project cost $2.96 and produced 18 trained models with verified checkpoints. My conclusion is that dynamic rewiring may help slightly, but adding learned Euclidean or Hyperbolic geometry did not improve it. Making the current design larger does not appear to be money well spent.</p>
+</blockquote>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+			<h1><a href="https://robertritz.com/2026/08/13/daybreak-red-scares-me-daybreak.html">Daybreak Red scares me, Daybreak Blue to the rescue</a></h1>
+		
+
+		<a href="https://robertritz.com/2026/08/13/daybreak-red-scares-me-daybreak.html" class="u-url"><time class="dt-published" datetime="2026-08-13 15:08:19 &#43;0800">Aug 13, 2026</time></a>
+
+		<div class="e-content">
+			 <p>Now that we have superhuman AI that can hack nearly anything, I welcome the announcement of <a href="https://openai.com/index/expanding-daybreak-as-the-cyber-defense-window-narrows/">Daybreak</a> by the OpenAI team. Presumably these advanced cyber attack capabilities are still in the hands of state or other larger organizations, which means little fish like me <em>probably</em> aren&rsquo;t the immediate target of these actors. That window is closing though, as OpenAI so delicately put it.</p>
+<p>Once I saw the announcement I immediately signed up for the Trusted Access program. It took a few days for Daybreak Blue to show up, but today it was there! Daybreak Blue is a GPT5.6 Sol based model seemingly with cyber restrictions loosened (for defensive purposes, hence the blue name). In cybersecurity a &ldquo;blue&rdquo; team defends and a &ldquo;red&rdquo; team attacks. The red model is reserved for institutions and cybersecurity researchers.</p>
+<p>The first thing I did was ask Daybreak Blue for a security audit of the various apps and services I have deployed on my main public server. It&rsquo;s used for some business services, school services, and some personal projects (like my <a href="https://weather.robertritz.com">weather</a> app). In one week these were the attack stats on this server:</p>
+<ul>
+<li>31,050 rejected password guesses (Peak: 8,549 guesses in one day)</li>
+<li>510 distinct hostile source IPs.</li>
+<li>Most-targeted usernames:
+<ul>
+<li>root: 12,075</li>
+<li>admin: 1,598</li>
+<li>ubuntu: 1,487</li>
+<li>user: 959</li>
+<li>aum: 772</li>
+</ul>
+</li>
+</ul>
+<p>Notably password authentication only existed with a silly long password up until last week. This was an oversight and I really should have turned it off earlier. Now login is much more difficult but there are still about 2,000 attempts per day.</p>
+<p>It also checked our main web proxy for a one hour snapshot of access attempts:</p>
+<ul>
+<li>7,786 requests total.</li>
+<li>109 recognizable vulnerability probes targeting .env, WordPress, .git, AWS credentials, PHPMyAdmin, and CGI paths.</li>
+<li>None received a successful response: 87 returned 404, 12 redirects, and 10 returned 502.</li>
+</ul>
+<p>These are bots trying to find services on the server with exposed credentials, vulnerable paths, and common exploits in popular software like WordPress (which we don&rsquo;t run on this server).</p>
+<p>The funny thing is that this is the least surprising thing it found. Anyone who runs a server connected to the internet knows about these issues (vibe coders beware, there be dragons). Back in 2010 if I checked my server logs I would see very similar stats.</p>
+<p>In general I feel like I run a solid server, and I&rsquo;ve only knowingly had servers compromised a few times, and I&rsquo;ve never lost any data. I do a monthly Common Vulnerabilities and Exposures (CVE) sweep on all my deployed apps and fix any CVEs that are known. I harden my servers and ensure the firewall only allows those ports that are necessary. Password login is always off (oops except this one, it&rsquo;s the things you forget that can bite you).</p>
+<p>For the most part, up until this year, the steps I&rsquo;ve taken without Daybreak&rsquo;s help would be enough to protect most small business or individual servers from most attacks. It wouldn&rsquo;t be enough to protect against an &ldquo;advanced persistent threat&rdquo; like the NSA, Unit 8200, or any of the various Chinese or Russian APT groups. But I slept reasonably well knowing that I&rsquo;m <em>probably</em> not the target of any of those groups. I simply run some business applications and a learning management system on this server.</p>
+<p>Then all the news about offensive grade hacking models came out. I no longer feel any type of security. It doesn&rsquo;t help that I&rsquo;m reading <a href="https://www.amazon.com/gp/product/B000FC1AFC/ref=kinw_myk_ro_title">Pandora&rsquo;s Star</a>, a book that features a super-intelligent AI that can break through insane levels of encryption and has advanced cyber capabilities. Sci-fi aside, the risk seems to be real and coming fast. So I&rsquo;m doing what I can to reduce my attack surface. That is hard when most of the information in our lives today is digital and internet accessible.</p>
+<p>Back when I briefly worked on staff for a member of Congress (circa 2010), I attended cybersecurity briefings aimed to help staffers protect themselves and their offices from attacks. These briefings were run by the NSA blue team. Back then it was mostly focused on mobile security. Being technical myself I knew all of the attack vectors they were talking about, but I could see the disinterest/confusion/apathy in the eyes of the audience. Most of these staffers were made to go by their offices, and the NSA team did a valiant job trying to make it understandable. Ever since I&rsquo;ve had little hope that average people have any hope to secure their lives, and the real responsibility lies with our technology vendors and under appreciated systems administrators (buy yours a blueberry muffin next time you see them).</p>
+<p>It is only a matter of time before open weight models obtain cyber capabilities, and then my server logs might start changing. If that happens, a single vulnerability or chain of small vulnerabilities can open your entire professional and personal digital existence. These days I&rsquo;m mostly a CEO/president/professor, but I still do my sys admin duties on my cloud server, the rack at my university, and my home systems. I have given only passing thoughts to security for the past 6 or 7 years as my usual processes work great.</p>
+<p>Daybreak Blue gave me some recommendations on further hardening my system, which I will promptly do. I&rsquo;ll probably start a nightly or weekly CVE sweep as well. I only hope other sysadmins around the world are doing the same.</p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
 			<h1><a href="https://robertritz.com/2026/08/10/googles-weather-api-doesnt-want.html">Google&#39;s Weather API doesn&#39;t want me to use it for weather. </a></h1>
 		
 
